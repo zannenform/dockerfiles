@@ -1,5 +1,5 @@
 upstream appserver {
-  {{range service "appserver"}}server {{.Address}}:{{.Port}};{{end}}
+  {{range service "php5-fpm"}}server {{.Address}}:{{.Port}};{{end}}
 }
 
 server {

@@ -1,7 +1,8 @@
-# データボリュームコンテナ 用 Dockerfile for boot2docker
+# データボリュームコンテナ 用 Dockerfile
 
-boot2docker 向け データボリュームコンテナ用 Dockerfile です。
-MySQL データディレクトリを持っています。
+データボリュームコンテナ用 Dockerfile です。  
+boot2docker での利用を想定しています。  
+MySQL 用データディレクトリとして、`/var/lib/mysql`ディレクトリが用意されています。
 
 ## 起動
 

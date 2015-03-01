@@ -13,6 +13,8 @@ RUN apt-get -y update && apt-get install -y php5-fpm php5-cli php5-json
 # Set up PHP.
 RUN echo "cgi.fix_pathinfo=0" > /etc/php5/fpm/conf.d/local.ini && \
   echo "date.timezone = Asia/Tokyo" >> /etc/php5/fpm/conf.d/local.ini && \
+  sed -i -e "s/^listen =.*$/listen = 9000/" /etc/php5/fpm/pool.d/www.conf && \
+  sed -i -e "s/^user =.*$/user = 1000/" /etc/php5/fpm/pool.d/www.conf && \
   mkdir /var/www
 
 # Define mountable directories.
