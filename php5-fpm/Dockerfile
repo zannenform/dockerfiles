@@ -4,10 +4,8 @@
 # 
 # docker run -itd -p 9000:9000 -v <pool.d-dir>:/etc/php5/fpm/pool.d -v <html-dir>:/var/www php5-fpm
 
+FROM ubuntu:14.04
 MAINTAINER zanenform
-
-# Pull base image.
-FROM dockerfile/ubuntu:14.04
 
 # Install PHP-FPM.
 RUN apt-get -y update && apt-get install -y php5-fpm php5-cli php5-json

@@ -1,8 +1,6 @@
 # Redis Server
 
-# Pull base image.
 FROM ubuntu:14.04
-
 MAINTAINER zanenform
 
 # Install Redis

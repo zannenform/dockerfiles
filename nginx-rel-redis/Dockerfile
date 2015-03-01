@@ -9,10 +9,8 @@
 # redis と連携することでマルチホストアプリケーションサーバーに対応します。
 # docker run -itd -p 80:80 -p 443:443 --env REDISSERVER=192.168.59.103 nginx
 
+FROM ubuntu:14.04
 MAINTAINER zanenform
-
-# Pull base image.
-FROM dockerfile/ubuntu:14.04
 
 # Install Nginx.
 RUN apt-get -y update && apt-get install -y nginx-extras lua-nginx-redis
