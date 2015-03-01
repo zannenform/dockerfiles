@@ -24,7 +24,7 @@ fuelPHP のための config 設定を行っています。
 ### Consul
 
 サービスディスカバリーサービスです。  
-利用方法は公式ページに確認してください。  
+利用方法は公式ページにて確認してください。  
 dockerイメージ`progrium/docker-consul`を利用すると簡単に Consul の環境が整います。  
 ```
 docker pull progrium/consul
@@ -39,7 +39,7 @@ docker run -d -p 8300:8300 -p 8301:8301/tcp -p 8301:8301/udp -p 8302:8302/tcp -p
 #### マルチホストで利用する場合
 
 ４台以上のマルチホスト環境で、Consulクラスタノードを３台稼働させる場合は、以下のように Consul を起動します。  
-1. 1台目  
+* 1台目  
 ```
 docker run -d -p 8300:8300 -p 8301:8301/tcp -p 8301:8301/udp -p 8302:8302/tcp -p 8302:8302/udp -p 8400:8400 -p 8500:8500 -p 8600:53/tcp -p 8600:53/udp --name consulserver --hostname consul1 progrium/consul -server -bootstrap-expect 3
 ```  
@@ -47,15 +47,15 @@ docker run -d -p 8300:8300 -p 8301:8301/tcp -p 8301:8301/udp -p 8302:8302/tcp -p
 ```
 docker inspect -f '{{.NetworkSettings.IPAddress}}' consul
 ```  
-2. 2台目  
+* 2台目  
 ```
 docker run -d -p 8300:8300 -p 8301:8301/tcp -p 8301:8301/udp -p 8302:8302/tcp -p 8302:8302/udp -p 8400:8400 -p 8500:8500 -p 8600:53/tcp -p 8600:53/udp --name consulserver --hostname consul2 progrium/consul -server -join 1台目の.ノードの.IP.アドレス
 ```  
-3. 3台目  
+* 3台目  
 ```
 docker run -d -p 8300:8300 -p 8301:8301/tcp -p 8301:8301/udp -p 8302:8302/tcp -p 8302:8302/udp -p 8400:8400 -p 8500:8500 -p 8600:53/tcp -p 8600:53/udp --name consulserver --hostname consul3 progrium/consul -server -join 1台目の.ノードの.IP.アドレス
 ```  
-4. 4台目以降  
+* 4台目以降  
 クラスタノード以上のサーバーには、Counsul クライアントノードを起動させます。  
 （-server オプションを取り除くことでクライアントノードになります）  
 ```
