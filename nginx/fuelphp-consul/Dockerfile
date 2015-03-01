@@ -14,7 +14,7 @@ MAINTAINER zanenform
 RUN apt-get -y update && apt-get install -y nginx
 
 # Install consul-template.
-RUN apt-get install -y golang && \
+RUN apt-get install -y golang git make && \
   export GOPATH="/usr/share/go/" && \
   cd /usr/local/src && \
   git clone https://github.com/hashicorp/consul-template.git && \
