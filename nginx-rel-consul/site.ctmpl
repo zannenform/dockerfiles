@@ -1,0 +1,51 @@
+upstream appserver {
+  {{range service "appserver"}}server {{.Address}}:{{.Port}};{{end}}
+}
+
+server {
+  listen 80 default_server;
+  listen [::]:80 default_server ipv6only=on;
+  server_name localhost;
+
+  root /var/www/public_html;
+
+  index index.php index.html;
+
+  include /etc/nginx/fastcgi_params;
+  fastcgi_param FUEL_ENV local;
+
+  location ~ \.php$ {
+    fastcgi_pass  appserver;
+    fastcgi_keep_conn on;
+  }
+
+  location / {
+    try_files     $uri $uri/ @handler;
+    expires     30d;
+  }
+
+  location @handler {
+    rewrite ^ /index.php?/$request_uri;
+  }
+
+  location ~ ^/index.php$ {
+     fastcgi_param       SCRIPT_FILENAME $document_root$fastcgi_script_name;
+  }
+
+  location ~ \.php$ {
+    deny all;
+  }
+
+  location ~* ^/(modules|application|system) {
+    return 403;
+  }
+
+  error_page 404                  /index.php;
+
+  # deny access to .htaccess files, if Apache's document root
+  # concurs with nginx's one
+  #
+  location ~ /\.ht {
+    deny  all;
+  }
+}

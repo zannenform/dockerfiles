@@ -1,0 +1,79 @@
+lua_package_path "/usr/share/lua/5.1/nginx/?.lua;;";
+
+server {
+  listen 80 default_server;
+  listen [::]:80 default_server ipv6only=on;
+  server_name localhost;
+
+  root /var/www/vermap/public;
+
+  index index.php index.html;
+
+  include /etc/nginx/fastcgi_params;
+  fastcgi_param FUEL_ENV local;
+
+  location ~ \.php$ {
+    set $upstream "";
+
+    rewrite_by_lua '
+      local redisserver = os.getenv("REDISSERVER");
+
+      -- connect to redis
+      local redis = require "redis"
+      local ins_redis = redis:new()
+      ins_redis:set_timeout(1000) -- 1 sec
+      local ok, err = ins_redis:connect(redisserver, 6379)
+
+      if not ok then
+        ngx.log(ngx.ERR, "failed to connect to redis: ", err)
+        ngx.say("failed to connect to redis: ", err)
+        return ngx.exit(500)
+      end
+
+      local upstream, err = ins_redis:srandmember("upstream")
+      if not upstream then
+        ngx.log(ngx.ERR, "failed to get redis key: ", err)
+        return ngx.exit(500)
+      end
+
+      if upstream == ngx.null then
+        ngx.log(ngx.ERR, "no upstream found for key ", key)
+        return ngx.exit(400)
+      end
+
+      ngx.var.upstream  = upstream
+    ';
+
+    fastcgi_pass  $upstream;
+  }
+
+  location / {
+    try_files     $uri $uri/ @handler;
+    expires     30d;
+  }
+
+  location @handler {
+    rewrite ^ /index.php?/$request_uri;
+  }
+
+  location ~ ^/index.php$ {
+     fastcgi_param       SCRIPT_FILENAME $document_root$fastcgi_script_name;
+  }
+
+  location ~ \.php$ {
+    deny all;
+  }
+
+  location ~* ^/(modules|application|system) {
+    return 403;
+  }
+
+  error_page 404                  /index.php;
+
+  # deny access to .htaccess files, if Apache's document root
+  # concurs with nginx's one
+  #
+  location ~ /\.ht {
+    deny  all;
+  }
+}
