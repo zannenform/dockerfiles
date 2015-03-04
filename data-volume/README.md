@@ -8,4 +8,4 @@ MySQL 用データディレクトリとして、`/var/lib/mysql`ディレクト�
 
 -v オプションをつけて MySQL データディレクトリをマウント可能にします。
 
-    docker run -itd -v /var/lib/mysql storage
+    docker run -itd -v /var/lib/mysql zannenform/data-volume

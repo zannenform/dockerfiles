@@ -18,7 +18,7 @@ RUN dpkg-divert --local --rename --add /sbin/initctl
 RUN ln -sf /bin/true /sbin/initctl
 
 # セットアップ用endpoint.shをコピー
-COPY setup-entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY entrypoint.sh /
 
 # Define mountable directories.
 VOLUME ["/var/lib/mysql"]
@@ -26,4 +26,4 @@ VOLUME ["/var/lib/mysql"]
 # Expose ports.
 EXPOSE 3306
 
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
