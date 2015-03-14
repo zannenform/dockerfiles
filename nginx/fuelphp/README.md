@@ -9,4 +9,8 @@ fuelPHP のための config 設定を行っています。
 
 php5-fpmコンテナを`-link`オプションで指定します。
 
-    docker run -itd -p 80:80 -p 443:443 --link [php5-fpmコンテナ]:php5-fpm nginx
+    docker run -itd -p 80:80 -p 443:443 --link [php5-fpmコンテナ]:php5-fpm zannenform/nginx-fuelphp
+
+fuelPHP の実行環境を`-e`オプションで指定します 
+
+    docker run -itd -p 80:80 -p 443:443 --link [php5-fpmコンテナ]:php5-fpm -e "FUEL_ENV=[local|development|production|...]" zannenform/nginx-fuelphp

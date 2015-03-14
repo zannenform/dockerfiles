@@ -8,13 +8,13 @@ boot2docker での利用を想定しています。
 
 ドキュメントルートを`-v`オプションで指定します。
 
-    docker run -itd -p 9000:9000 -v [/html-dir/path]:/var/www php5-fpm
+    docker run -itd -p 9000:9000 -v [/html-dir/path]:/var/www zannenform/php5-fpm
 
 ## アプリケーションプールを指定した起動
 
 アプリケーションプールのディレクトリをマウントすることで、任意のプール設定で起動することができます。
 
-    docker run -itd -p 9000:9000 -v [/pool.d-dir/path]:/etc/php5/fpm/pool.d -v [/html-dir/path]:/var/www php5-fpm
+    docker run -itd -p 9000:9000 -v [/pool.d-dir/path]:/etc/php5/fpm/pool.d -v [/html-dir/path]:/var/www zannenform/php5-fpm
 
 ## php.ini
 
