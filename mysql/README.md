@@ -1,4 +1,4 @@
-# MySQL 用 Dockerfile for boot2docker
+# MySQL5.6 用 Dockerfile for boot2docker
 
 boot2docker 向け MySQL サーバー用 Dockerfile です。
 boot2docker ユーザーと MySQL ユーザーを同一にしています。

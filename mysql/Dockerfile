@@ -1,8 +1,6 @@
-# MySQL for boot2docker
+# MySQL5.6 for boot2docker
 #
 # オプション値として root のパスワードを指定すると、そのパスワードでrootが作成されます。
-# デフォルトのパスワードは P@ssw0rd です。
-#
 # docker run -itd -p 3306:3306 --volumes-from [データボリュームコンテナ] mysql [任意のMySQLのrootパスワードを指定]
 
 FROM ubuntu:14.04

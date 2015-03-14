@@ -8,7 +8,7 @@ fi
 echo "#1 Install MySQL:"
 echo mysql-server mysql-server/root_password password $PASS | debconf-set-selections
 echo mysql-server mysql-server/root_password_again password $PASS | debconf-set-selections
-apt-get install -y mysql-server
+apt-get install -y mysql-server-5.6
 apt-get clean
 
 echo "#2 Edit my.cnf:"
