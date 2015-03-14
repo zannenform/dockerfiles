@@ -15,6 +15,13 @@ server {
   set_by_lua $fuel_env 'return os.getenv("FUEL_ENV")';
   fastcgi_param FUEL_ENV $fuel_env;
 
+  set $mysql_addr "";
+  set $mysql_port "";
+  set_by_lua $mysql_addr 'return os.getenv("MYSQL_PORT_3306_TCP_ADDR")';
+  set_by_lua $mysql_port 'return os.getenv("MYSQL_PORT_3306_TCP_PORT")';
+  fastcgi_param MYSQL_PORT_3306_TCP_ADDR $mysql_addr;
+  fastcgi_param MYSQL_PORT_3306_TCP_PORT $mysql_port;
+
   location ~ \.php$ {
     set $fpm "";
     set_by_lua $php5_fpm 'return os.getenv("PHP5_FPM_PORT_9000_TCP_ADDR")';

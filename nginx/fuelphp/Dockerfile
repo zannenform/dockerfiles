@@ -15,6 +15,8 @@ RUN apt-get -y update && apt-get install -y nginx-extras lua-nginx-redis
 RUN chown -R www-data:www-data /var/lib/nginx && \
   sed -i '1s/^/daemon off;\n/' /etc/nginx/nginx.conf && \
   sed -i '1s/^/env PHP5_FPM_PORT_9000_TCP_ADDR;\n/' /etc/nginx/nginx.conf && \
+  sed -i '1s/^/env MYSQL_PORT_3306_TCP_ADDR;\n/' /etc/nginx/nginx.conf && \
+  sed -i '1s/^/env MYSQL_PORT_3306_TCP_PORT;\n/' /etc/nginx/nginx.conf && \
   sed -i '1s/^/env FUEL_ENV;\n/' /etc/nginx/nginx.conf
 
 COPY fuelphp-conf /etc/nginx/sites-available/default

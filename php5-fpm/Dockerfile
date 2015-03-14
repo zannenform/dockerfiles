@@ -8,8 +8,7 @@ FROM ubuntu:14.04
 MAINTAINER zanenform
 
 # Install PHP-FPM.
-RUN apt-get -y update && apt-get install -y php5-fpm php5-cli php5-json
-
+RUN apt-get -y update && apt-get install -y php5-fpm php5-cli php5-json php5-mysql libmysqlclient-dev mysql-common
 # Set up PHP.
 RUN echo "cgi.fix_pathinfo=0" > /etc/php5/fpm/conf.d/local.ini && \
   echo "date.timezone = Asia/Tokyo" >> /etc/php5/fpm/conf.d/local.ini && \

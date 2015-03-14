@@ -7,9 +7,9 @@ fuelPHP のための config 設定を行っています。
 
 ## 起動
 
-php5-fpmコンテナを`-link`オプションで指定します。
+php5-fpmコンテナとmysqlコンテナを`-link`オプションで指定します。
 
-    docker run -itd -p 80:80 -p 443:443 --link [php5-fpmコンテナ]:php5-fpm zannenform/nginx-fuelphp
+    docker run -itd -p 80:80 -p 443:443 --link [php5-fpmコンテナ]:php5-fpm --link [mysqlコンテナ]:mysql -e "FUEL_ENV=local" zannenform/nginx-fuelphp
 
 fuelPHP の実行環境を`-e`オプションで指定します 
 
