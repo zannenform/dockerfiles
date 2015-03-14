@@ -1,19 +1,11 @@
 lua_package_path "/usr/share/lua/5.1/nginx/?.lua;;";
 
-upstream appserver {
-  rewrite_by_lua '
-    ngx.var.upstream_addr  = os.getenv("PHP5-FPM_PORT_9000_TCP_ADDR")
-  ';
-
-  server $upstream_addr:9000;
-}
-
 server {
   listen 80 default_server;
   listen [::]:80 default_server ipv6only=on;
   server_name localhost;
 
-  root /var/www/vermap/public;
+  root /var/www/public;
 
   index index.php index.html;
 
@@ -21,7 +13,9 @@ server {
   fastcgi_param FUEL_ENV local;
 
   location ~ \.php$ {
-    fastcgi_pass  appserver;
+    set $fpm "";
+    set_by_lua $php5_fpm 'return os.getenv("PHP5_FPM_PORT_9000_TCP_ADDR")';
+    fastcgi_pass  $php5_fpm:9000;
   }
 
   location / {
