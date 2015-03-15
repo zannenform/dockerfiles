@@ -3,13 +3,15 @@
 #   fuelPHP
 #   Single host application
 #
-# docker run -itd -p 80:80 -p 443:443 --link [php5-fpmコンテナ]:php5-fpm -e "FUEL_ENV=[local|development|production|...]" nginx
+# docker run -itd -p 80:80 -p 443:443 --link [php5-fpmコンテナ]:php5-fpm --link [mysqlコンテナ]:mysql -e "FUEL_ENV=[local|development|production|...]" zannenform/nginx-fuelphp
 
 FROM ubuntu:14.04
 MAINTAINER zanenform
 
 # Install Nginx.
-RUN apt-get -y update && apt-get install -y nginx-extras lua-nginx-redis
+RUN apt-get -y update && apt-get upgrade -y && \
+    apt-get install -y nginx-extras lua-nginx-redis && \
+    apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
 # Nginx Config.
 RUN chown -R www-data:www-data /var/lib/nginx && \

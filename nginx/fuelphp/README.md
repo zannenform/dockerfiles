@@ -7,10 +7,15 @@ fuelPHP のための config 設定を行っています。
 
 ## 起動
 
-php5-fpmコンテナとmysqlコンテナを`-link`オプションで指定します。
+php5-fpmコンテナを`-link`オプションで指定します。
 
-    docker run -itd -p 80:80 -p 443:443 --link [php5-fpmコンテナ]:php5-fpm --link [mysqlコンテナ]:mysql -e "FUEL_ENV=local" zannenform/nginx-fuelphp
+    docker run -itd -p 80:80 -p 443:443 --link [php5-fpmコンテナ]:php5-fpm zannenform/nginx-fuelphp
 
-fuelPHP の実行環境を`-e`オプションで指定します 
+MySQLコンテナを`-link`オプションで指定することで、MySQLのIPアドレス、ポートを環境変数に設定することができます。
+fuelPHP の場合`filter_input(INPUT_SERVER, 'MYSQL_PORT_3306_TCP_ADDR')`などを利用して MySQL との接続を行います。
+
+    docker run -itd -p 80:80 -p 443:443 --link [php5-fpmコンテナ]:php5-fpm --link [MySQLコンテナ]:mysql -e "FUEL_ENV=local" zannenform/nginx-fuelphp
+
+fuelPHP の実行環境を`-e`オプションで指定することが可能です。
 
     docker run -itd -p 80:80 -p 443:443 --link [php5-fpmコンテナ]:php5-fpm -e "FUEL_ENV=[local|development|production|...]" zannenform/nginx-fuelphp
