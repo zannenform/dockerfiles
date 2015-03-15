@@ -16,6 +16,13 @@ boot2docker での利用を想定しています。
 
     docker run -itd -p 9000:9000 -v [/pool.d-dir/path]:/etc/php5/fpm/pool.d -v [/html-dir/path]:/var/www zannenform/php5-fpm
 
+## MySQL コンテナを指定した起動
+
+MySQLコンテナを`--link`で指定することで、php cli の実行でMySQLにアクセスすることが可能です。
+
+    docker run -itd -p 9000:9000 -link [mysqlコンテナ]:mysql -v [/html-dir/path]:/var/www zannenform/php5-fpm
+
+
 ## php.ini
 
 |項目|値|

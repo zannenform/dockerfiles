@@ -2,7 +2,7 @@
 #
 # php config: Asia/Tokyo
 # 
-# docker run -itd -p 9000:9000 -v <pool.d-dir>:/etc/php5/fpm/pool.d -v <html-dir>:/var/www zannenform/php5-fpm
+# docker run -itd -p 9000:9000 -v <pool.d-dir>:/etc/php5/fpm/pool.d -v <html-dir>:/var/www --link [mysqlコンテナ]:mysql zannenform/php5-fpm
 
 FROM ubuntu:14.04
 MAINTAINER zanenform
