@@ -12,7 +12,8 @@ php5-fpmコンテナを`-link`オプションで指定します。
     docker run -itd -p 80:80 -p 443:443 --link [php5-fpmコンテナ]:php5-fpm zannenform/nginx-fuelphp
 
 MySQLコンテナを`-link`オプションで指定することで、MySQLのIPアドレス、ポートを環境変数に設定することができます。
-fuelPHP の場合`filter_input(INPUT_SERVER, 'MYSQL_PORT_3306_TCP_ADDR')`などを利用して MySQL との接続を行います。
+fuelPHP の場合`$_SERVER['MYSQL_PORT_3306_TCP_ADDR']`を利用して MySQL との接続を行います。
+(fastCGIのバグのため、filter_input関数での取得はできない可能性があります)
 
     docker run -itd -p 80:80 -p 443:443 --link [php5-fpmコンテナ]:php5-fpm --link [MySQLコンテナ]:mysql -e "FUEL_ENV=local" zannenform/nginx-fuelphp
 

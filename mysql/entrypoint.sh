@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 PASS="P@ssw0rd"
-if [ $# -eq 1 ]; then
-  PASS=$1
+if [ -n "$ROOT_PASSWORD" ]; then
+  PASS=$ROOT_PASSWORD
 fi
 
 echo "#1 Install MySQL:"

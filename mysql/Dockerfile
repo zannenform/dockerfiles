@@ -1,7 +1,7 @@
 # MySQL5.6 for boot2docker
 #
-# オプション値として root のパスワードを指定すると、そのパスワードでrootが作成されます。
-# docker run -itd -p 3306:3306 --volumes-from [データボリュームコンテナ] zannenform/mysql [任意のMySQLのrootパスワードを指定]
+# ROOT_PASSWORDに root のパスワードを指定すると、そのパスワードでrootが作成されます。
+# docker run -itd -p 3306:3306 --volumes-from [データボリュームコンテナ] -e "ROOT_PASSWORD=[任意のMySQLのrootパスワードを指定]" zannenform/mysql
 
 FROM ubuntu:14.04
 MAINTAINER zanenform
