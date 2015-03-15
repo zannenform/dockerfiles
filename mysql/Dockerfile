@@ -7,8 +7,7 @@ FROM ubuntu:14.04
 MAINTAINER zanenform
 
 # Ubuntu update
-RUN apt-get -y update && apt-get upgrade -y && \
-    apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
+RUN apt-get -y update && apt-get upgrade -y
 
 # mysql ユーザーを boot2docker ユーザーにする
 RUN groupadd mysql && useradd --uid 1000 -g mysql mysql

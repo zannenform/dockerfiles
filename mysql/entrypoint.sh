@@ -9,7 +9,7 @@ echo "#1 Install MySQL:"
 echo mysql-server mysql-server/root_password password $PASS | debconf-set-selections
 echo mysql-server mysql-server/root_password_again password $PASS | debconf-set-selections
 apt-get install -y mysql-server
-apt-get clean
+apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
 echo "#2 Edit my.cnf:"
 sed -i -e "s/key_buffer\([^_]\)/key_buffer_size\1/" /etc/mysql/my.cnf
