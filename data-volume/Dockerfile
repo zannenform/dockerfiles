@@ -13,3 +13,6 @@ RUN groupadd -g 1000 storage && useradd -u 1000 -g storage storage
 # MySQL データ保存ディレクトリ
 RUN mkdir /var/lib/mysql && \
     chown storage:storage /var/lib/mysql
+
+
+CMD ["/bin/sh"]
