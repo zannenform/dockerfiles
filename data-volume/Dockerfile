@@ -14,5 +14,5 @@ RUN groupadd -g 1000 storage && useradd -u 1000 -g storage storage
 RUN mkdir /var/lib/mysql && \
     chown storage:storage /var/lib/mysql
 
-
-CMD ["/bin/sh"]
+# プロセスの永続化
+CMD ["/bin/sh", "-c", "while true; do sleep 10; done"]
