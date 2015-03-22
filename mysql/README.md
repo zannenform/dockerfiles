@@ -9,10 +9,10 @@ boot2docker ユーザーと MySQL ユーザーを同一にしています。
 
 ## root パスワードオプション
 
-`docker run`コマンドに引数をつけると、その文字列が MySQL の root パスワードになります。
+`docker run`コマンドにオプション`-e "ROOT_PASSWORD="`をつけると、その文字列が MySQL の root パスワードになります。
 省略した場合、root パスワードには `P@ssw0rd` が設定されます。
 
-    docker run -itd -p 3306:3306 zannenform/mysql [任意のroot パスワード]
+    docker run -itd -p 3306:3306 -e "ROOT_PASSWORD=[任意のMySQLのrootパスワードを指定]" zannenform/mysql
 
 ## クライアントのディレクトリを MySQL データディレクトリにする
 
