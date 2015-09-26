@@ -9,7 +9,7 @@ MAINTAINER zanenform
 
 # Install PHP-FPM.
 RUN apt-get -y update && apt-get upgrade -y && \
-    apt-get install -y php5-fpm php5-cli php5-json php5-curl php5-mysql libmysqlclient-dev mysql-common && \
+    apt-get install -y php5-fpm php5-cli php5-json php5-curl php5-mysql libmysqlclient-dev mysql-common language-pack-ja && \
     apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
 # Set up PHP.
