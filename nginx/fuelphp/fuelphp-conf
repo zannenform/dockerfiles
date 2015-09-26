@@ -23,7 +23,7 @@ server {
   fastcgi_param MYSQL_PORT_3306_TCP_PORT $mysql_port;
 
   location ~ \.php$ {
-    set $fpm "";
+    set $php5_fpm "";
     set_by_lua $php5_fpm 'return os.getenv("PHP5_FPM_PORT_9000_TCP_ADDR")';
     fastcgi_pass  $php5_fpm:9000;
   }
